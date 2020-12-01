@@ -1,20 +1,18 @@
 export default class ApiService {
     constructor() {
-        this.searchQuery = '',
-        this.page = 1
+        this.searchQuery = ''
+        
     }
 
     getQuery (searchQuery) {
         
-    const key = '19196352-c8b59687c9ebaed16cee14214';
-    const url = `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${key}`;
+    const key = 'aa3a7ee5f1eef77c63293faf47999964';
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${this.searchQuery}&appid=${key}`;
 
     return fetch(url)
         .then(resronce => resronce.json())
         .then(data => {
-            console.log(data);
-            this.increment();
-            return data.hits;
+            return data.name            
         })
         .catch (error => console.log('idi v les'))
     }
@@ -26,12 +24,7 @@ export default class ApiService {
         return this.searchQuery = newQuery;
     }
 
-    increment() {
-        this.page += 1;
-    }
-    resetPage() {
-        this.page = 1;
-    }
+        
 
 }
 

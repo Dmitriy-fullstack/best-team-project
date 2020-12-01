@@ -1,61 +1,44 @@
-
-import './style.scss';
-import NewApiService from "./ApiService";
-import galleryTpl from './templates/gallery.hbs';
-
+import FetchCity from './ApiService';
+import debounce from 'lodash.debounce';
+import { data } from 'autoprefixer';
 
 
 const refs = {
-searchForm: document.querySelector('.search-form'),
-gallery: document.querySelector('.gallery'),
-loadMoreBtn: document.querySelector('.loadMore__btn'),
-   
-} 
-
-refs.searchForm.addEventListener('submit', onSearch);
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
-
-const newApiService = new NewApiService();
-
-btnIsHiddenAdd ();
- 
-function onSearch (event) {
-  
-  event.preventDefault();
-  newApiService.query = event.currentTarget.elements.query.value;
-  clearCard();
-  newApiService.resetPage();
-  newApiService.getQuery().then(renderCard);
-  btnIsHiddenRemove();
- 
+    input: document.querySelector('.header__input'),
+    btnFavourite: document.querySelector('.header__favouriteCity')
 }
 
-function onLoadMore() {
-  newApiService.getQuery().then(renderCard);
-  onScroll();
-}
+// let favouriteCityes = [];
 
-function btnIsHiddenAdd () {
-  refs.loadMoreBtn.classList.add('is-hidden')
-}
-function btnIsHiddenRemove() {
-  refs.loadMoreBtn.classList.remove('is-hidden')
-}
+refs.input.addEventListener('input', debounce(onSearch, 1500));
+// refs.btnFavourite.addEventListener('click', onBtnFavouriteClick());
 
-function renderCard (hits) {
-  refs.gallery.insertAdjacentHTML('beforeend', galleryTpl(hits));
-}
+const newFetchCity = new FetchCity();
 
-function clearCard () {
-  refs.gallery.innerHTML = '';
+function onSearch(event) {
+
+    event.preventDefault();
+      
+    newFetchCity.query = event.target.value.trim();
+
+    if (newFetchCity.query.length === 0) clearResult();
+      
+    newFetchCity.getQuery()        
+         .then(data => {
+             const CityName = data;
+             console.log(CityName);
+         })
+         .catch(error => {console.log(error), clearResult()})
+       
+      
 }
-function onScroll() {
-  let height = document.body.scrollHeight - 400;
-  setTimeout(() => {
-   window.scrollTo({
-     top: height,
-     left: 0,
-     behavior: 'smooth',
-   });
- }, 100);
-}
+function clearResult() {
+    refs.input.value = '';
+    
+  }
+
+// function onBtnFavouriteClick() {
+    
+//  favouriteCityes.append();
+//  console.log(favouriteCityes);
+// }

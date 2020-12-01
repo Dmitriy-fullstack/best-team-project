@@ -4,29 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-    <title>findPictures</title>
+    <title>weather</title>
 </head>
 <body>
-    <div class="form">
-        <form class="search-form" id="search-form">
-          <input
-          class="input-query"
-            type="text"
-            name="query"
-            autocomplete="off"
-            placeholder="Search images..."
-          />
-        <button type="submit" class="Btn-primary btn" >Искать</button>
-        </form>
-        </div>
-        
-        <div class="container">
-          <ul class="gallery">
-
-          </ul>
-        </div>
-        
-        <button class="loadMore__btn btn is-hidden" >Load More</button>
+    <header>
+      <input onfocus="this.value=''" type="text" placeholder="enter city" class="header__input">
+      <button class="header__favouriteCity">Add at favourite</button>
+    </header>
     
 </body>
 </html>
