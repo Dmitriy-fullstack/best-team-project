@@ -1,17 +1,15 @@
 import FetchCity from './ApiService';
 import debounce from 'lodash.debounce';
-import { data } from 'autoprefixer';
-
 
 const refs = {
     input: document.querySelector('.header__input'),
     btnFavourite: document.querySelector('.header__favouriteCity')
 }
 
-// let favouriteCityes = [];
+let favouriteCityes = [];
 
 refs.input.addEventListener('input', debounce(onSearch, 1500));
-// refs.btnFavourite.addEventListener('click', onBtnFavouriteClick());
+refs.btnFavourite.addEventListener('click', onBtnFavouriteClick());
 
 const newFetchCity = new FetchCity();
 
@@ -27,6 +25,7 @@ function onSearch(event) {
          .then(data => {
              const CityName = data;
              console.log(CityName);
+             
          })
          .catch(error => {console.log(error), clearResult()})
        
@@ -37,8 +36,11 @@ function clearResult() {
     
   }
 
-// function onBtnFavouriteClick() {
-    
-//  favouriteCityes.append();
-//  console.log(favouriteCityes);
-// }
+function onBtnFavouriteClick(event) {
+   if(event !== '') {
+ favouriteCityes.push(event);
+ console.log(favouriteCityes)}
+ else {
+     return
+ }
+}

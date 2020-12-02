@@ -12,7 +12,7 @@ export default class ApiService {
     return fetch(url)
         .then(resronce => resronce.json())
         .then(data => {
-            return data.name            
+            return data            
         })
         .catch (error => console.log('idi v les'))
     }
