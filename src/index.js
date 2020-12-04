@@ -1,15 +1,19 @@
 import FetchCity from './ApiService';
 import debounce from 'lodash.debounce';
+import './style.scss';
+
 
 const refs = {
-    input: document.querySelector('.header__input'),
-    btnFavourite: document.querySelector('.header__favouriteCity')
+    input: document.querySelector('.search__input'),
+    btnFavourite: document.querySelector('.search__favouriteCity'),
+    favCitiesContainer: document.querySelector('.js-fav-cities')
 }
 
-let favouriteCityes = [];
+let favouriteCities = [];
 
 refs.input.addEventListener('input', debounce(onSearch, 1500));
-refs.btnFavourite.addEventListener('click', onBtnFavouriteClick());
+refs.btnFavourite.addEventListener('click', onBtnFavouriteClick);
+
 
 const newFetchCity = new FetchCity();
 
@@ -17,14 +21,14 @@ function onSearch(event) {
 
     event.preventDefault();
       
-    newFetchCity.query = event.target.value.trim();
+    newFetchCity.query = event.target.value;
 
-    if (newFetchCity.query.length === 0) clearResult();
+    if (newFetchCity.query === '') {clearResult()};
       
     newFetchCity.getQuery()        
          .then(data => {
              const CityName = data;
-             console.log(CityName);
+             console.log(CityName.name);
              
          })
          .catch(error => {console.log(error), clearResult()})
@@ -36,11 +40,12 @@ function clearResult() {
     
   }
 
-function onBtnFavouriteClick(event) {
-   if(event !== '') {
- favouriteCityes.push(event);
- console.log(favouriteCityes)}
- else {
-     return
- }
+function onBtnFavouriteClick(event) {    
+    if (event) {          
+        favouriteCities.push(refs.input.value); 
+        refs.favCitiesContainer.textContent = favouriteCities;
+        
+   }
 }
+
+

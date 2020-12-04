@@ -7,11 +7,67 @@
     <title>weather</title>
 </head>
 <body>
-    <header>
-      <div class="logo"></div>
-      <input onfocus="this.value=''" type="text" placeholder="enter city" class="header__input">
-      <button class="header__favouriteCity">Add at favourite</button>
+  <div>
+    <header class="header container">
+
+      <div class="logo">
+        <a href="./index.html">
+          <img src="../images/logo.png" alt="WeatherInfo">
+        </a>
+      </div>
+
+      <div class="header-nav">
+          
+            <select class="header-nav__select" name="header__nav" >
+              <option>
+                <a href="">Forecasts</a>
+              </option>
+              <option>
+                <a href="">Climate change</a>
+              </option>
+              <option>
+                <a href="">lifestyle</a>
+              </option>
+              <option>
+                <a href="">Photos</a>
+              </option>
+              <option>
+                <a href="">News</a>
+              </option>
+            </select>
+
+            <nav>
+              <ul class="header-nav__ul">
+                <li class="header-nav__item">Forecasts</li>
+                <li class="header-nav__item">Climate change</li>
+                <li class="header-nav__item">lifestyle</li>
+                <li class="header-nav__item">Photos</li>
+                <li class="header-nav__item">News</li>
+
+              </ul>
+            </nav>
+      </div>
     </header>
+
+    <div class="search">
+
+      <div class="search__form">  
+        <input onfocus="this.value=''" type="text" placeholder="search city" class="search__input">
+      </div>
+
+      <div class="search__location"> 
+        <div class="search__location__btn"> 
+          <button class="search__favouriteCity">+</button>
+        </div>
+        <div class="column">
+          <p class="search__location__title">Add location </p>
+          <span class="search__location__text">Did you know you can add favourite locations?</span>
+          <div class="favourite-cities js-fav-cities"></div>
+        </div>
+      </div>
+      
+    </div>
     
+  </div> 
 </body>
 </html>
